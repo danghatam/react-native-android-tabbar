@@ -4,27 +4,30 @@ var React = require('react-native');
 var {
   Component,
   View,
+  Navigator,
 } = React;
 var AltContainer = require('alt/AltNativeContainer');
 var TabStore = require('../../store/tab.js');
 var TabActions = require('../../actions/tab.js');
 var TabBar = require('./bar.js');
-var TabContent = require('./content.js');
 
 class TabContainer extends Component {
 
+  _renderScene(route, navigator){
+    let Element = route.component;
+    return(
+      <Element />
+    );
+  }
 
   render(){
     return(
-      <View>
-        <AltContainer
-          store={TabStore}
-          actions={TabActions}>
-          <TabContent />
-          <TabBar />
-        </AltContainer>
-      </View>
-
+      <Navigator
+        initialRoute={this.props.currentRoute}
+        navigationBar={<TabBar routes={this.props.routeList} />}
+        renderScene={this._renderScene.bind(this)}
+        // configureScene={this._configureScene}
+      />
     );
   }
 }

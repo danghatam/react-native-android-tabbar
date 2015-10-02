@@ -17,8 +17,13 @@ class TabBar extends Component {
     super();
   }
   render(){
-    let _tabsBar = this.props.routeList.map( route =>
-      <TabButton key={route.index} route={route} />
+    let _tabsBar = this.props.routes.map( route =>
+      <TabButton
+        key={route.index}
+        route={route}
+        navigator={this.props.navigator}
+        navState={this.props.navState}
+      />
     );
     return(
       <View style={styles.tabBar}>
@@ -34,7 +39,6 @@ class TabBar extends Component {
 
 var styles = StyleSheet.create({
   tabBar: {
-
   }
 });
 
